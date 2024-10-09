@@ -1,4 +1,4 @@
-schemaVersion: 2.2.2
+schemaVersion: 2.3.0
 metadata:
   name: openvsx
 components:
@@ -128,16 +128,9 @@ commands:
         find server/build/test-extensions -name '*.vsix' -exec cli/lib/ovsx publish '{}' \;
 
 # Commands to deploy OpenVSX to OpenShift
-  - id: oc-login
-    exec:
-      label: "2.1. OC log-in"
-      commandLine: |
-        echo "Please log in to the OpenShift cluster as a cluster admin using the oc command"
-      component: tool
-
   - id: build-openvsx-image
     exec:
-      label: "2.2. Build and Publish OpenVSX Image"
+      label: "2.1. Build and Publish OpenVSX Image"
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/openshift
       commandLine: |
@@ -154,7 +147,7 @@ commands:
 
   - id: build-ovsx-cli-image
     exec:
-      label: "2.3. Build and Publish OpenVSX CLI Image"
+      label: "2.2. Build and Publish OpenVSX CLI Image"
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/openshift
       commandLine: |
@@ -166,7 +159,7 @@ commands:
 
   - id: deploy-openvsx
     exec:
-      label: "2.4. Deploy OpenVSX"
+      label: "2.3. Deploy OpenVSX"
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/openshift
       commandLine: |
@@ -177,7 +170,7 @@ commands:
 
   - id: enable-internal-openvsx
     exec:
-      label: "2.5. Configure Che to use the internal Open VSX registry"
+      label: "2.4. Configure Che to use the internal Open VSX registry"
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/openshift
       commandLine: |

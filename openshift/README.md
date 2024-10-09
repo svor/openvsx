@@ -15,16 +15,16 @@ Make sure you are logged in to your OpenShift cluster as a cluster admin:
 ```
 oc login --username=your-admin-username --password=your-admin-password
 ```
-* 2.2. Build and Publish OpenVSX Image
+* 2.1. Build and Publish OpenVSX Image
 
 Build the OpenVSX image and push it to the OpenShift internal registry. You'll ask to enter the OpenVSX version to deploy (default is v0.17.0).
-* 2.3. Build and Publish OpenVSX CLI Image
+* 2.2. Build and Publish OpenVSX CLI Image
 
 Build the OpenVSX CLI image and push it to the OpenShift internal registry.
-* 2.4. Deploy OpenVSX
+* 2.3. Deploy OpenVSX
 
 Deploy the OpenVSX registry using the provided `openvsx-deployment.yml` template
-* 2.5. Configure Che to use the internal Open VSX registry
+* 2.4. Configure Che to use the internal Open VSX registry
 
 In case you have deployed Eclipse Che on the cluster, you can patch it to use your private OpenVSX registry.
 
