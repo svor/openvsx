@@ -177,7 +177,7 @@ commands:
 
   - id: deploy-custom-openvsx
     exec:
-      label: "2.4.1 Deploy Custom OpenVSX"
+      label: "2.4.1. Deploy Custom OpenVSX"
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/deploy/openshift
       commandLine: |
