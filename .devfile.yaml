@@ -221,7 +221,7 @@ commands:
               echo "✅ PostgreSQL pod is running and ready."
               break
             fi
-            sleep 2
+            sleep 5
           done
           # Execute SQL inserts
           echo "⚙️ Inserting user and PAT into OpenVSX database..."
