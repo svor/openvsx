@@ -223,6 +223,7 @@ commands:
             fi
             sleep 5
           done
+          sleep 5
           # Execute SQL inserts
           echo "⚙️ Inserting user and PAT into OpenVSX database..."
           kubectl exec -n "$OPENVSX_NAMESPACE" "$POSTGRESQL_POD_NAME" -- bash -c \
