@@ -3,6 +3,7 @@ https://open-vsx.org/api/redhat/vscode-yaml/1.18.0/file/redhat.vscode-yaml-1.18.
 https://open-vsx.org/api/vscjava/vscode-java-debug/0.58.2/file/vscjava.vscode-java-debug-0.58.2.vsix
 https://open-vsx.org/api/redhat/java/1.43.1/file/redhat.java-1.43.1.vsix
 https://open-vsx.org/api/vscode/html-language-features/1.95.3/file/vscode.html-language-features-1.95.3.vsix
+https://open-vsx.org/api/redhat/vscode-microprofile/0.14.0/file/redhat.vscode-microprofile-0.14.0.vsix
 https://open-vsx.org/api/redhat/vscode-quarkus/1.21.0/file/redhat.vscode-quarkus-1.21.0.vsix
 https://open-vsx.org/api/redhat/fabric8-analytics/0.9.6/file/redhat.fabric8-analytics-0.9.6.vsix
 https://open-vsx.org/api/redhat/vscode-redhat-account/0.2.0/file/redhat.vscode-redhat-account-0.2.0.vsix
