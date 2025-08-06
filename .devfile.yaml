@@ -185,7 +185,7 @@ commands:
           OPENVSX_SERVER_IMAGE=${OPENVSX_SERVER_IMAGE}
           export OPENVSX_SERVER_IMAGE
           echo "OPENVSX_SERVER_IMAGE is set to $OPENVSX_SERVER_IMAGE"
-          oc process -f openvsx-deploy-no-es.yml \
+          oc process -f openvsx-deployment-no-es.yml \
           -p OPENVSX_SERVER_IMAGE="${OPENVSX_SERVER_IMAGE}" \
           | oc apply -f -
 
