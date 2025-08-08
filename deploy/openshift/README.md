@@ -14,7 +14,7 @@ Creates a namespace on the OpenShift cluster for deploying OpenVSX (default: ope
 
 * 2.2. Build and Publish OpenVSX Image
 
-Build the OpenVSX image and push it to the OpenShift internal registry. You'll ask to enter the OpenVSX version to deploy (default is v0.18.0).
+Build the OpenVSX image and push it to the OpenShift internal registry. You'll ask to enter the OpenVSX version to deploy (default is v0.27.0).
 
 * 2.3. Build and Publish OpenVSX CLI Image
 
