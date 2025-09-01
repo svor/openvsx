@@ -15,39 +15,6 @@ components:
       volumeMounts:
         - name: local
           path: /home/user/.local/
-  - name: elasticsearch
-    container:
-      image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
-      memoryRequest: 256Mi
-      memoryLimit: 2Gi
-      cpuRequest: 100m
-      cpuLimit: 800m
-      endpoints:
-        - exposure: internal
-          name: elasticsearch
-          protocol: tcp
-          targetPort: 9200
-        - exposure: internal
-          name: es9300
-          protocol: tcp
-          targetPort: 9300
-        - exposure: public
-          name: che-server
-          targetPort: 8080
-        - exposure: public
-          name: che-webui
-          targetPort: 3000
-      env:
-        - name: bootstrap.memory_lock
-          value: 'true'
-        - name: cluster.routing.allocation.disk.threshold_enabled
-          value: 'false'
-        - name: discovery.type
-          value: single-node
-        - name: xpack.ml.enabled
-          value: 'false'
-        - name: xpack.security.enabled
-          value: 'false'
   - name: postgresql
     container:
       image: 'image-registry.openshift-image-registry.svc:5000/openshift/postgresql:15-el8'
