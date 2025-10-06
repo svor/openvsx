@@ -9,29 +9,38 @@
  * ****************************************************************************** */
 package org.eclipse.openvsx.cache;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.stereotype.Component;
-import redis.embedded.RedisServer;
+import java.io.File;
+import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.io.IOException;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.stereotype.Component;
+
+import redis.embedded.RedisServer;
 
 @Component
 @ConditionalOnProperty(value = "ovsx.redis.embedded", havingValue = "true")
 public class EmbeddedRedisServer {
 
     private final int port;
+    private final EmbeddedRedisProperties embeddedRedisProperties;
     private RedisServer server;
 
-    public EmbeddedRedisServer(RedisProperties properties) {
-        port = properties.getPort();
+    public EmbeddedRedisServer(RedisProperties properties, EmbeddedRedisProperties embeddedRedisProperties) {
+        this.port = properties.getPort();
+        this.embeddedRedisProperties = embeddedRedisProperties;
     }
 
     @PostConstruct
     public void start() throws IOException {
-        server = new RedisServer(port);
+        if (embeddedRedisProperties.getPath() != null && !embeddedRedisProperties.getPath().isEmpty()) {
+            server = new RedisServer(port, new File(embeddedRedisProperties.getPath()));
+        } else {
+            server = new RedisServer(port);
+        }
         server.start();
     }
 
