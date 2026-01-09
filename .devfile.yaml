@@ -150,10 +150,10 @@ commands:
           OPENVSX_VERSION=${OPENVSX_VERSION:-v0.27.0}
           export OPENVSX_VERSION
           echo "OPENVSX_VERSION is set to $OPENVSX_VERSION"
-          podman build -t "openvsx:$OPENVSX_VERSION" --build-arg "OPENVSX_VERSION=$OPENVSX_VERSION" -f openvsx.Dockerfile .&&
-          export IMAGE=image-registry.openshift-image-registry.svc:5000/$OPENVSX_NAMESPACE/openvsx &&
-          podman tag openvsx:$OPENVSX_VERSION ${IMAGE} &&
-          podman login --tls-verify=false -u $(oc whoami | tr -d :) -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000 &&
+          podman build -t "openvsx:$OPENVSX_VERSION" --build-arg "OPENVSX_VERSION=$OPENVSX_VERSION" -f openvsx.Dockerfile .
+          export IMAGE=image-registry.openshift-image-registry.svc:5000/$OPENVSX_NAMESPACE/openvsx
+          podman tag openvsx:$OPENVSX_VERSION ${IMAGE}
+          podman login --tls-verify=false -u $(oc whoami | tr -d :) -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000
           podman push --tls-verify=false "${IMAGE}"
 
   - id: build-ovsx-cli-image
@@ -166,10 +166,10 @@ commands:
           OVSX_VERSION=${OVSX_VERSION:-0.10.5}
           export OVSX_VERSION
           echo "OVSX_VERSION is set to $OVSX_VERSION"
-          podman build -t "openvsx-cli:$OVSX_VERSION" --build-arg "OVSX_VERSION=$OVSX_VERSION" -f cli.Dockerfile .&&
-          export IMAGE=image-registry.openshift-image-registry.svc:5000/$OPENVSX_NAMESPACE/openvsx-cli &&
-          podman tag openvsx-cli:$OVSX_VERSION ${IMAGE} &&
-          podman login --tls-verify=false -u $(oc whoami | tr -d :) -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000 &&
+          podman build -t "openvsx-cli:$OVSX_VERSION" --build-arg "OVSX_VERSION=$OVSX_VERSION" -f cli.Dockerfile .
+          export IMAGE=image-registry.openshift-image-registry.svc:5000/$OPENVSX_NAMESPACE/openvsx-cli
+          podman tag openvsx-cli:$OVSX_VERSION ${IMAGE}
+          podman login --tls-verify=false -u $(oc whoami | tr -d :) -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000
           podman push --tls-verify=false "${IMAGE}"
 
   - id: deploy-openvsx
@@ -178,10 +178,7 @@ commands:
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/deploy/openshift
       commandLine: |
-          oc process -f openvsx-deployment.yml \
-          -p OPENVSX_SERVER_IMAGE=image-registry.openshift-image-registry.svc:5000/$OPENVSX_NAMESPACE/openvsx \
-          -p OPENVSX_CLI_IMAGE=image-registry.openshift-image-registry.svc:5000/$OPENVSX_NAMESPACE/openvsx-cli \
-          | oc apply -f -
+          oc process -f openvsx-deployment.yml -p OPENVSX_SERVER_IMAGE=image-registry.openshift-image-registry.svc:5000/$OPENVSX_NAMESPACE/openvsx -p OPENVSX_CLI_IMAGE=image-registry.openshift-image-registry.svc:5000/$OPENVSX_NAMESPACE/openvsx-cli | oc apply -f -
 
   - id: deploy-custom-openvsx
     exec:
@@ -193,9 +190,7 @@ commands:
           OPENVSX_SERVER_IMAGE=${OPENVSX_SERVER_IMAGE}
           export OPENVSX_SERVER_IMAGE
           echo "OPENVSX_SERVER_IMAGE is set to $OPENVSX_SERVER_IMAGE"
-          oc process -f openvsx-deployment-no-es.yml \
-          -p OPENVSX_SERVER_IMAGE="${OPENVSX_SERVER_IMAGE}" \
-          | oc apply -f -
+          oc process -f openvsx-deployment-no-es.yml -p OPENVSX_SERVER_IMAGE="${OPENVSX_SERVER_IMAGE}" | oc apply -f -
 
   - id: add-openvsx-user-with-pat
     exec:
