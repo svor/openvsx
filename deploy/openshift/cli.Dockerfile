@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/nodejs-20-minimal:1-63.1725851021 as builder
+FROM registry.access.redhat.com/ubi9/nodejs-20-minimal:9.7-1767673633 as builder
 
 ARG OVSX_VERSION
 ENV VERSION=$OVSX_VERSION

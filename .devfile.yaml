@@ -4,7 +4,7 @@ metadata:
 components:
   - name: tool
     container:
-      image: quay.io/devfile/universal-developer-image:ubi9-latest
+      image: quay.io/devfile/universal-developer-image:ubi10-latest
       memoryRequest: 256Mi
       memoryLimit: 8Gi
       cpuRequest: 100m
@@ -73,7 +73,7 @@ commands:
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/cli
       commandLine: |
-        yarn install &&
+        yarn install 
         yarn prepare
 
   - id: build-webui
@@ -82,8 +82,8 @@ commands:
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/webui
       commandLine: |
-        yarn install &&
-        yarn build &&
+        yarn install 
+        yarn build 
         yarn build:default
 
   - id: build-server
@@ -92,6 +92,8 @@ commands:
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx
       commandLine: |
+        JAVA_25="$(basename "$JAVA_HOME_25")"
+        sdk use java "$JAVA_25"
         server/gradlew -p server assemble downloadTestExtensions
 
   - id: run-server
@@ -100,10 +102,12 @@ commands:
       component: tool
       workingDir: ${PROJECTS_ROOT}/openvsx/server
       commandLine: |
-        ./scripts/generate-properties.sh &&
-        sed -i 's/localhost:5432\/postgres/localhost:5432\/openvsx/g' src/dev/resources/application.yml &&
-        sed -i 's/username: gitpod/username: openvsx/g' src/dev/resources/application.yml &&
-        sed -i 's/password: gitpod/password: openvsx/g' src/dev/resources/application.yml &&
+        JAVA_25="$(basename "$JAVA_HOME_25")"
+        sdk use java "$JAVA_25"
+        ./scripts/generate-properties.sh
+        sed -i 's/localhost:5432\/postgres/localhost:5432\/openvsx/g' src/dev/resources/application.yml
+        sed -i 's/username: gitpod/username: openvsx/g' src/dev/resources/application.yml
+        sed -i 's/password: gitpod/password: openvsx/g' src/dev/resources/application.yml
         ./gradlew runServer
 
   - id: run-webui

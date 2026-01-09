@@ -1,7 +1,7 @@
 ARG OPENVSX_VERSION
 
 # Builder image to compile the website
-FROM registry.access.redhat.com/ubi9:9.5-1730489303 as builder
+FROM registry.access.redhat.com/ubi9:9.7-1767674301 as builder
 
 WORKDIR /workdir
 
